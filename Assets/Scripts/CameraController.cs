@@ -19,7 +19,6 @@ public class CameraController : MonoBehaviour
         if (player != null)
         {
             transform.position = player.transform.position + offset;
-            transform.LookAt(player.transform.position);
         }
     }
 }
