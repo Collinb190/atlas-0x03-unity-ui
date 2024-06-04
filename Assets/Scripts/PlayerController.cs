@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 	public float speed;
 	public float sprint;
+	public int health = 5;
 	private int score = 0;
 
 	private Rigidbody rb;
@@ -24,14 +25,20 @@ public class PlayerController : MonoBehaviour {
 		rb.velocity = movement;
     }
 
-    // Handles score incrementation
     void OnTriggerEnter(Collider other)
 	{
+		// Coin Collision
 		if (other.CompareTag("Pickup"))
 		{
 			score++;
             Debug.Log($"Score: {score}");
 			Destroy(other.gameObject);
         }
+		// Trap Collision
+		if (other.CompareTag("Trap"))
+		{
+			health--;
+			Debug.Log($"Health: {health}");
+		}
     }
 }
