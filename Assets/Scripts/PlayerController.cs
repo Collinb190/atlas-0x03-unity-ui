@@ -11,6 +11,11 @@ public class PlayerController : MonoBehaviour {
 
 	private Rigidbody rb;
 
+	// Teleporter Positions and push offset
+	public GameObject teleporter1;
+	public GameObject teleporter2;
+	private Vector3 teleportPush = new Vector3 (0, 0, -3);
+
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody>();
@@ -44,6 +49,7 @@ public class PlayerController : MonoBehaviour {
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
+	// Object Collisions
     void OnTriggerEnter(Collider other)
 	{
 		// Coin Collision
@@ -63,6 +69,18 @@ public class PlayerController : MonoBehaviour {
 		if (other.CompareTag("Goal"))
 		{
 			Debug.Log("You win!");
+		}
+		// Teleport Collision
+		if (other.CompareTag("Teleport"))
+		{
+			if (other.gameObject.name == "Teleporter")
+			{
+                transform.position = teleporter2.transform.position + teleportPush;
+            }
+			if (other.gameObject.name == "Teleporter (1)")
+			{
+				transform.position = teleporter1.transform.position + teleportPush;
+			}
 		}
     }
 }
