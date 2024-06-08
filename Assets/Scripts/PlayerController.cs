@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,7 +8,8 @@ public class PlayerController : MonoBehaviour {
 	public float speed;
 	public float sprint;
 	public int health;
-	private int score;
+    public TextMeshProUGUI scoreText;
+    private int score;
 
 	private Rigidbody rb;
 
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 		health = 5;
 		score = 0;
+		SetScoreText();
 	}
 	
 	// FixedUpdate is called once per frame and on physics clock
@@ -49,6 +52,12 @@ public class PlayerController : MonoBehaviour {
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
+	// Method to update the score text
+	void SetScoreText()
+	{
+		scoreText.text = "Score: " + score.ToString();
+	}
+
 	// Object Collisions
     void OnTriggerEnter(Collider other)
 	{
@@ -56,7 +65,8 @@ public class PlayerController : MonoBehaviour {
 		if (other.CompareTag("Pickup"))
 		{
 			score++;
-            Debug.Log($"Score: {score}");
+			SetScoreText();
+            // Debug.Log($"Score: {score}");
 			Destroy(other.gameObject);
         }
 		// Trap Collision
