@@ -149,7 +149,6 @@ public class PlayerController : MonoBehaviour {
 		if (other.CompareTag("Goal"))
 		{
 			DisplayWinLoseText(true);
-			Debug.Log(" you win ");
 			StartCoroutine(ReloadScenceWithDelay(5));
 		}
 		// Teleport Collision
