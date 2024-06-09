@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			DisplayWinLoseText(false);
 			Debug.Log(" health zero ");
-			//StartCoroutine(ReloadScenceWithDelay(5));
+			StartCoroutine(ReloadScenceWithDelay(5));
 		}
 	}
 
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			DisplayWinLoseText(true);
 			Debug.Log(" you win ");
-			//StartCoroutine(ReloadScenceWithDelay(5));
+			StartCoroutine(ReloadScenceWithDelay(5));
 		}
 		// Teleport Collision
 		if (other.CompareTag("Teleport"))
