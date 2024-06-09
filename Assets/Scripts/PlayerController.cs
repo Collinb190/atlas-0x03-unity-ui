@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	// Restart the scene with delay
-	IEnumerator ReloadScenceWithDelay(float delay)
+	IEnumerator LoadScene(float delay)
 	{
 		yield return new WaitForSeconds(delay);
 		ReloadScene();
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			DisplayWinLoseText(false);
 			Debug.Log(" health zero ");
-			StartCoroutine(ReloadScenceWithDelay(5));
+			StartCoroutine(LoadScene(3));
 		}
 	}
 
@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour {
 		if (other.CompareTag("Goal"))
 		{
 			DisplayWinLoseText(true);
-			StartCoroutine(ReloadScenceWithDelay(5));
+			StartCoroutine(LoadScene(3));
 		}
 		// Teleport Collision
 		if (other.CompareTag("Teleport"))
