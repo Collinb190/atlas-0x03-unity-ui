@@ -2126,7 +2126,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
+  m_fontSize: 18
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3144,6 +3144,7 @@ MonoBehaviour:
   sprint: 30
   scoreText: {fileID: 1958975544}
   healthText: {fileID: 638996804}
+  winLoseText: {fileID: 381544737}
   health: 5
   teleporter1: {fileID: 138706378}
   teleporter2: {fileID: 1381319679}

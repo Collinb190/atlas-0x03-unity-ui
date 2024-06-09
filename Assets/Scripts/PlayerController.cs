@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 public class PlayerController : MonoBehaviour {
 	#region Fields
 
@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
 	// UI Elements
     public TextMeshProUGUI scoreText;
 	public TextMeshProUGUI healthText;
+	public TextMeshProUGUI winLoseText;
 	public int health;
     private int score;
 	// Physics Elements
@@ -55,6 +56,9 @@ public class PlayerController : MonoBehaviour {
 		health = 5;
 		score = 0;
 		SetScoreText();
+		SetHealthText();
+		winLoseText.transform.parent.gameObject.SetActive(false);
+		winLoseText.text = "";
 	}
 
 	// Handle player movement
@@ -68,13 +72,21 @@ public class PlayerController : MonoBehaviour {
 		rb.velocity = movement;
 	}
 
+	// Restart the scene with delay
+	IEnumerator ReloadScenceWithDelay(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		ReloadScene();
+	}
+
 	// Check if the game is over
 	void CheckGameOver ()
 	{
         if (health == 0)
 		{
-			Debug.Log("Game Over!");
-			ReloadScene();
+			DisplayWinLoseText(false);
+			Debug.Log(" health zero ");
+			//StartCoroutine(ReloadScenceWithDelay(5));
 		}
 	}
 
@@ -94,6 +106,23 @@ public class PlayerController : MonoBehaviour {
 	void SetHealthText()
 	{
 		healthText.text = "Health: " + health.ToString();
+	}
+
+	// Method to display win or loose text
+	void DisplayWinLoseText(bool won)
+	{
+		Image bgImage = winLoseText.transform.parent.GetComponent<Image>();
+		winLoseText.transform.parent.gameObject.SetActive(true);
+		if (won)
+		{
+            bgImage.color = Color.green;
+			winLoseText.color = Color.black;
+            winLoseText.text = "You Win!";
+		}
+		else
+		{
+			winLoseText.text = "Game Over!";
+		}
 	}
 
  	#endregion
@@ -119,7 +148,9 @@ public class PlayerController : MonoBehaviour {
 		// Goal Collision
 		if (other.CompareTag("Goal"))
 		{
-			Debug.Log("You win!");
+			DisplayWinLoseText(true);
+			Debug.Log(" you win ");
+			//StartCoroutine(ReloadScenceWithDelay(5));
 		}
 		// Teleport Collision
 		if (other.CompareTag("Teleport"))
