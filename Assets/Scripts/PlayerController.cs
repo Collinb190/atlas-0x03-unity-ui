@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 public class PlayerController : MonoBehaviour {
 	#region Fields
 
@@ -42,12 +43,22 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+		AccessMenu();
 		CheckGameOver();
     }
 
 	#endregion
 
 	#region Custom Methods
+
+	// Handle menu access
+	void AccessMenu()
+	{
+		if (Input.GetKey (KeyCode.Escape))
+		{
+            SceneManager.LoadScene("Menu");
+        }
+	}
 
 	// Initialize player settings
 	void InitializePlayer()
